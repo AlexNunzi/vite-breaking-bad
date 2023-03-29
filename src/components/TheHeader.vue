@@ -19,7 +19,13 @@ export default{
 
 
 <style scoped lang="scss">
+@use '../styles/variables';
+
 #logo {
     height: 3rem;
+}
+
+header{
+    background-color: variables.$bg-theheader;
 }
 </style>
