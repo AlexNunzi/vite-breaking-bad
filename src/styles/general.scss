@@ -1,1 +1,6 @@
 @use 'bootstrap';
+@use './variables';
+
+main {
+    background-color: variables.$primary-color;
+}
