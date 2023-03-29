@@ -1,10 +1,23 @@
 <template>
-    <div>CARD</div>
+
+    <div class="card">
+    <img :src="image" class="card-img-top" :alt="name">
+    <div class="card-body">
+      <h5 class="card-title">{{ name }}</h5>
+      <p class="card-text">{{ archetype }}</p>
+    </div>
+  </div>
+
 </template>
 
 <script>
 export default {
     name: 'SingleCard',
+    props: {
+        image: String,
+        name: String,
+        archetype: String,
+    }
 }
 </script>
 
