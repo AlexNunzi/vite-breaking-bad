@@ -1,7 +1,7 @@
 <template>
     <div class="ms_main-content bg-white ps-5 pt-5 pe-5">
         <div>
-            <p class="bg-black text-white m-0 p-2">Found N card</p>
+            <p v-if="storage.cardList.data" class="bg-black text-white m-0 p-2">Found {{ storage.cardList.data.length }} card</p>
             <div id="cards-container" class="d-flex flex-wrap">
                 <singleCard class="ms_card" v-for="card in storage.cardList.data"
                     
