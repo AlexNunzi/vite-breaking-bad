@@ -3,7 +3,7 @@
 
 <main class="p-3">
   <div class="container">
-    <FilteringComp />
+    <FilteringComp @selectArchetype="getCardsFromApi"/>
     <CardList />
   </div>
 
@@ -32,16 +32,27 @@ export default{
     }
   },
   methods: {
+    getAllArchetypes(){
+      axios.get('https://db.ygoprodeck.com/api/v7/archetypes.php?')
+      .then(response => {
+        this.storage.archetypesList = response.data;
+      })
+    },
     getCardsFromApi(){
-      axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?archetype=Blue-Eyes')
+      let urlApi = 'https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0'
+      
+      if(this.storage.selectedArchetype != 0){
+        urlApi += `&archetype=${this.storage.selectedArchetype}`;
+      }
+      axios.get(urlApi)
       .then(response => {
         this.storage.cardList = response.data;
-        // console.log(this.storage.cardList.data[0].name)
       })
     }
   },
   created() {
     this.getCardsFromApi();
+    this.getAllArchetypes();
   }
 }
 </script>
