@@ -1,14 +1,16 @@
 <template>
     <div class="ms_main-content bg-white ps-5 pt-5 pe-5">
         <div>
-            <p v-if="storage.cardList.data" class="bg-black text-white m-0 p-2">Found {{ storage.cardList.data.length }} card</p>
+            <p v-if="storage.cardList.data && storage.cardList.data.length > 0" class="bg-black text-white m-0 p-2">{{ foundNumber }}</p>
+            <p v-else class="bg-black text-white m-0 p-2">No cards found</p>
             <div id="cards-container" class="d-flex flex-wrap">
-                <singleCard class="ms_card" v-for="card in storage.cardList.data"
+                <singleCard v-if="storage.cardList.data && storage.cardList.data.length > 0" class="ms_card" v-for="card in storage.cardList.data"
                     
                     :image="card.card_images[0].image_url"
                     :name="card.name"
                     :archetype="card.archetype"
                 />
+                <p v-else class="m-auto mt-5 fw-bold">There are no cards to show</p>
             </div>
         </div>
     </div>
@@ -25,6 +27,11 @@ export default {
     data() {
         return{
             storage
+        }
+    },
+    computed: {
+        foundNumber(){
+            return `Found ${this.storage.cardList.data.length} card`;
         }
     }
 }
