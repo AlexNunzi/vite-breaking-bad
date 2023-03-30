@@ -4,6 +4,8 @@ export const storage = reactive(
     {
         cardList: [],
         selectedArchetype: '',
-        archetypesList: []
+        archetypesList: [],
+        loadingArchetype: true,
+        loadingCards: true
     }
 );

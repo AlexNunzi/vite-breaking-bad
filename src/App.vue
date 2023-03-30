@@ -33,12 +33,18 @@ export default{
   },
   methods: {
     getAllArchetypes(){
+      this.storage.loadingArchetype = true;
       axios.get('https://db.ygoprodeck.com/api/v7/archetypes.php?')
       .then(response => {
         this.storage.archetypesList = response.data;
+        this.storage.loadingArchetype = false;
+      }).catch(error => {
+        this.archetypesList = [];
+        this.storage.loadingArchetype = false;
       })
     },
     getCardsFromApi(){
+      this.storage.loadingCards = true;
       let urlApi = 'https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0'
       
       if(this.storage.selectedArchetype != 0){
@@ -47,6 +53,10 @@ export default{
       axios.get(urlApi)
       .then(response => {
         this.storage.cardList = response.data;
+        this.storage.loadingCards = false;
+      }).catch(error => {
+        this.storage.cardList = [];
+        this.storage.loadingCards = false;
       })
     }
   },

@@ -1,6 +1,7 @@
 <template>
     <div class="ms_main-content bg-white ps-5 pt-5 pe-5">
-        <div>
+        <LoadingComp v-if="storage.loadingArchetype == true || storage.loadingCards == true" />
+        <div v-else>
             <p v-if="storage.cardList.data && storage.cardList.data.length > 0" class="bg-black text-white m-0 p-2">{{ foundNumber }}</p>
             <p v-else class="bg-black text-white m-0 p-2">No cards found</p>
             <div id="cards-container" class="d-flex flex-wrap">
@@ -18,11 +19,13 @@
 
 <script>
 import SingleCard from './SingleCard.vue';
+import LoadingComp from './LoadingComp.vue';
 import {storage} from '../storage.js';
 export default {
     name: 'CardList',
     components: {
         SingleCard,
+        LoadingComp,
     },
     data() {
         return{
@@ -43,7 +46,7 @@ export default {
     margin-bottom: 0.5rem;
 }
 
-div.ms_main-content {
+.ms_main-content {
     padding-bottom: 2.5rem;
 }
 
